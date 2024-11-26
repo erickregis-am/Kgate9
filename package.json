@@ -2,11 +2,21 @@
   "name": "dse-site",
   "version": "0.1.0",
   "private": true,
+  "_cmd-update-all-modules": "npm run update-all-modules",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "create-global-node-modules-folder": "if not exist \"%appdata%\\npm\\node_modules\" mkdir %appdata%\\npm\\node_modules",
+        "npm-i-g": "npm i npm@latest -g",
+        "npm-check-i-g": "npm i npm-check@latest -g",
+        "npm-check-u-l": "npm-check \"C:\\Program Files\\nodejs\\node_modules\\npm\" -y",
+        "npm-check-u-g": "npm-check \"C:\\Program Files\\nodejs\\node_modules\\npm\" -y -g",
+        "npm-deep-update-l": "npm update --depth 9999 --dev",
+        "npm-deep-update-g": "npm update --depth 9999 --dev -g",
+        "npm-cache-clear": "npm cache clear --force",
+        "update-all-modules": "npm run create-global-node-modules-folder && npm run npm-i-g && npm run npm-check-i-g && npm run npm-check-u-l && npm run npm-check-u-g && npm run npm-deep-update-l && npm run npm-deep-update-g && npm run npm-cache-clear"
   },
   "dependencies": {
     "firebase": "^11.0.2",

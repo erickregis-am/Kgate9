@@ -1,9 +1,12 @@
+'use client'
+
 import { get, ref } from "firebase/database";
 import { ArrowLeft, LockKeyhole, Mail } from "lucide-react";
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
 import { auth, db } from "../services/firebaseConfig";
 import { signInWithEmailAndPassword } from "firebase/auth";
+import { useRouter } from "next/navigation";
+import Link from "next/link";
  
 
 
@@ -15,7 +18,7 @@ export default function Login(){
     const [error, setError] = useState("");
     const [userDataFound, setUserDataFound] = useState("");
 
-    const navigate = useNavigate();
+    const navigate = useRouter();
 
     useEffect(() => {
         let timeout: NodeJS.Timeout | undefined;
@@ -47,7 +50,7 @@ export default function Login(){
                 setUserData(snapshot.val());
 
                 setTimeout(() => {
-                    navigate("/home");
+                    navigate.push("/home");
                   }, 2000);
 
             } else {
@@ -70,7 +73,7 @@ export default function Login(){
                         <div className="flex justify-between items-center w-3/5">
 
                             <button type="button" className="flex justify-content items-center w-8 h-8 bg-white border-none">
-                                <Link to="/" className="text-[#757474] hover:text-[#a8a8a8]">
+                                <Link href="/" className="text-[#757474] hover:text-[#a8a8a8]">
                                     <ArrowLeft className="w-8 h-8"></ArrowLeft>
                                 </Link>
                             </button>
@@ -90,7 +93,7 @@ export default function Login(){
                                 <span className="flex justify-center items-center px-2">
                                     <Mail color="#9da3ae" size={28} />
                                 </span>
-                                <input type="email" autoComplete="on" placeholder="Email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full rounded-lg
+                                <input type="email" autoComplete="off" placeholder="Email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" value={email} onChange={(e) => setEmail(e.target.value)} className="w-full rounded-lg
                                 font-mono text-darkBlueSite h-full p-4 bg-lightGraySite  focus:bg-white focus:outline-blueSite invalid:outline-pink-500 invalid:text-pink-600
                               focus:invalid:outline-pink-500 focus:invalid:ring-pink-500" required></input>
                             </div>
@@ -106,7 +109,7 @@ export default function Login(){
                             
                         </div>
 
-                        <button type="submit"className="py-2 px-4 my-4 mt-16 rounded-3 border-2 rounded-full w-2/4 hover:animate-pulse select-none transition ease-in-out delay-100 hover:scale-110 hover:bg-white hover:text-orangeSite hover:border-orangeSite hover:animate-pulse">
+                        <button type="submit"className="py-2 px-4 my-4 mt-16 rounded-3 border-2 rounded-full w-2/4 hover:animate-pulse select-none transition ease-in-out delay-100 border-graySite text-graySite hover:scale-110 hover:bg-white hover:text-orangeSite hover:border-orangeSite hover:animate-pulse">
                             <p className="font-mono  text-2xl">ENTRAR</p>
                         </button>
 
